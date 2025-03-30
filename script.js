@@ -13,7 +13,7 @@ function addQuestion() {
   document.getElementById("questions").appendChild(questionDiv);
 }
 
-// Saves the quiz along with creator details and the participant fields to collect
+// Saves the quiz along with creator details and participant fields to collect
 function saveQuiz() {
   let creatorName = document.getElementById("creatorName").value.trim();
   let detailsToCollect = document.getElementById("detailsToCollect").value.trim();
@@ -33,6 +33,7 @@ function saveQuiz() {
     let questionText = div.querySelector(".questionText").value.trim();
     let options = Array.from(div.querySelectorAll(".option")).map(opt => opt.value.trim());
     let correctAnswer = parseInt(div.querySelector(".correctAnswer").value) - 1;
+
     if (questionText && options.every(opt => opt) && correctAnswer >= 0 && correctAnswer < 4) {
       questions.push({ questionText, options, correctAnswer });
     }
@@ -46,7 +47,7 @@ function saveQuiz() {
   let quizId = `quiz_${Date.now()}`;
   let quizData = {
     creator: creatorName,
-    fields: fields,
+    fields: fields, // Participant details to collect
     title: quizTitle,
     description: quizDescription,
     questions: questions
@@ -54,16 +55,14 @@ function saveQuiz() {
 
   localStorage.setItem(quizId, JSON.stringify(quizData));
   
-  // Build the correct base URL from the current URL (which includes the repository name)
+  // Build the base URL using the current pathname to include repository name on GitHub Pages
   let currentUrl = window.location.href; // e.g., https://your-username.github.io/your-repo/index.html
-  let baseUrl = currentUrl.substring(0, currentUrl.lastIndexOf("/")); // e.g., https://your-username.github.io/your-repo
-  let quizLink = `${baseUrl}/quiz.html?id=${quizId}`;
+  let baseUrl = currentUrl.substring(0, currentUrl.lastIndexOf("/"));
+  let quizLink = `${window.location.origin}${baseUrl.substring(window.location.origin.length)}/quiz.html?id=${quizId}`;
   
   document.getElementById("quizLink").value = quizLink;
   alert("Quiz created successfully!");
 }
-
-   
 
 // Copies the quiz link to clipboard
 function copyLink() {
@@ -106,7 +105,7 @@ function loadQuiz() {
     form.appendChild(div);
   });
   
-  // Generate participant details input fields based on quiz.fields
+  // Generate participant details input fields dynamically based on quiz.fields
   let participantDiv = document.getElementById("participantDetails");
   participantDiv.innerHTML = "";
   quiz.fields.forEach(field => {
@@ -117,7 +116,7 @@ function loadQuiz() {
   loadScoreboard(quizId, quiz.fields);
 }
 
-// Submits the quiz, displays detailed results, and saves the score in the scoreboard
+// Submits the quiz, displays detailed results, and updates the scoreboard
 function submitQuiz() {
   let participantInputs = document.querySelectorAll(".participant-detail");
   let participantData = {};
@@ -165,7 +164,7 @@ function submitQuiz() {
   document.getElementById("result").innerHTML = resultSummaryHTML;
 }
 
-// Loads and displays the scoreboard with dynamic headers based on quiz fields
+// Loads and displays the scoreboard with dynamic headers based on quiz.fields
 function loadScoreboard(quizId, fields) {
   let scoreboard = JSON.parse(localStorage.getItem(`scoreboard_${quizId}`)) || [];
   let scoreboardHead = document.getElementById("scoreboardHead");
@@ -177,7 +176,7 @@ function loadScoreboard(quizId, fields) {
     headerRow += `<th>${field}</th>`;
   });
   headerRow += `<th>Score</th></tr>`;
-  document.getElementById("scoreboardHead").innerHTML = headerRow;
+  scoreboardHead.innerHTML = headerRow;
   
   // Populate table body
   scoreboardTableBody.innerHTML = "";
