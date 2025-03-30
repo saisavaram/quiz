@@ -21,7 +21,7 @@ function saveQuiz() {
   let quizDescription = document.getElementById("quizDescription").value.trim();
   let questions = [];
 
-  // detailsToCollect is a comma separated list; convert it to an array
+  // Convert comma-separated details into an array
   let fields = detailsToCollect.split(",").map(f => f.trim()).filter(f => f !== "");
 
   if (!creatorName || !quizTitle || !quizDescription || fields.length === 0) {
@@ -33,7 +33,6 @@ function saveQuiz() {
     let questionText = div.querySelector(".questionText").value.trim();
     let options = Array.from(div.querySelectorAll(".option")).map(opt => opt.value.trim());
     let correctAnswer = parseInt(div.querySelector(".correctAnswer").value) - 1;
-
     if (questionText && options.every(opt => opt) && correctAnswer >= 0 && correctAnswer < 4) {
       questions.push({ questionText, options, correctAnswer });
     }
@@ -47,17 +46,24 @@ function saveQuiz() {
   let quizId = `quiz_${Date.now()}`;
   let quizData = {
     creator: creatorName,
-    fields: fields, // participant details to collect
+    fields: fields,
     title: quizTitle,
     description: quizDescription,
     questions: questions
   };
 
   localStorage.setItem(quizId, JSON.stringify(quizData));
-  let quizLink = `${window.location.origin}/quiz.html?id=${quizId}`;
+  
+  // Build the correct base URL from the current URL (which includes the repository name)
+  let currentUrl = window.location.href; // e.g., https://your-username.github.io/your-repo/index.html
+  let baseUrl = currentUrl.substring(0, currentUrl.lastIndexOf("/")); // e.g., https://your-username.github.io/your-repo
+  let quizLink = `${baseUrl}/quiz.html?id=${quizId}`;
+  
   document.getElementById("quizLink").value = quizLink;
   alert("Quiz created successfully!");
 }
+
+   
 
 // Copies the quiz link to clipboard
 function copyLink() {
