@@ -1,0 +1,189 @@
+/* General Styling */
+body {
+  font-family: 'Poppins', sans-serif;
+  background: url('spring-leaves.jpg') no-repeat center center fixed;
+  background-size: cover;
+  color: #333;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+/* Container for content */
+.container {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 30px;
+  width: 90%;
+  max-width: 800px;
+  margin: 50px auto;
+  border-radius: 12px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Titles and Paragraphs */
+h2 {
+  font-size: 36px;
+  color: #2c3e50;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+h3 {
+  font-size: 28px;
+  color: #2980b9;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+p {
+  font-size: 20px;
+  color: #555;
+}
+
+/* Input Fields and Textarea */
+input, textarea {
+  font-size: 22px;
+  padding: 14px;
+  margin: 12px 0;
+  width: 90%;
+  max-width: 500px;
+  border: 2px solid #3498db;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.98);
+}
+
+/* Buttons */
+button {
+  font-size: 22px;
+  padding: 14px 30px;
+  margin: 20px 0;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background-color: #2980b9;
+}
+
+/* Question Box for Quiz Creation and Taking */
+.question-box {
+  background: #e3f2fd;
+  padding: 20px;
+  margin: 20px 0;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: left;
+}
+
+/* Options Container with Options in Boxes */
+.options-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.options-container label {
+  font-size: 22px;
+  padding: 12px 18px;
+  border: 2px solid #3498db;
+  border-radius: 8px;
+  background-color: #ecf0f1;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.options-container label:hover {
+  background-color: #d6eaf8;
+  transform: scale(1.02);
+}
+
+.options-container input[type="radio"] {
+  margin-right: 12px;
+}
+
+/* Quiz Link Display */
+#quizLink {
+  font-weight: bold;
+  font-size: 24px;
+  color: #0066cc;
+  margin: 20px 0;
+}
+
+/* Scoreboard Table */
+#scoreboard-table {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+  font-size: 22px;
+}
+
+#scoreboard-table th, #scoreboard-table td {
+  border: 2px solid #3498db;
+  padding: 16px;
+  text-align: center;
+}
+
+#scoreboard-table th {
+  background: #3498db;
+  color: white;
+}
+
+/* Detailed result styling */
+.result-question {
+  font-size: 22px;
+  text-align: left;
+  margin: 20px 0;
+  padding: 15px;
+  background: #f9f9f9;
+  border-left: 5px solid #3498db;
+  border-radius: 5px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    width: 95%;
+    padding: 20px;
+  }
+  
+  input, textarea {
+    font-size: 20px;
+    padding: 12px;
+  }
+  
+  button {
+    font-size: 20px;
+    padding: 12px 20px;
+  }
+  
+  h2 {
+    font-size: 30px;
+  }
+  
+  h3 {
+    font-size: 24px;
+  }
+  
+  .question-box p {
+    font-size: 22px;
+  }
+  
+  .options-container label {
+    font-size: 20px;
+    padding: 10px 15px;
+  }
+  
+  #quizLink {
+    font-size: 20px;
+  }
+  
+  th, td {
+    font-size: 20px;
+    padding: 12px;
+  }
+}

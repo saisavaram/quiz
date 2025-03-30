@@ -1,0 +1,74 @@
+/* Updated Code for Quiz Website */
+
+// script.js
+let quizzes = JSON.parse(localStorage.getItem("quizzes")) || [];
+let scores = JSON.parse(localStorage.getItem("scores")) || [];
+
+// Function to create a new quiz
+function createQuiz() {
+    let title = document.getElementById("quizTitle").value;
+    let questionCount = parseInt(document.getElementById("questionCount").value);
+    let questions = [];
+
+    for (let i = 0; i < questionCount; i++) {
+        let questionText = document.getElementById(`question${i + 1}`).value;
+        let options = Array.from(document.querySelectorAll(`.options${i + 1}`)).map(input => input.value);
+        let correctAnswer = document.getElementById(`correctAnswer${i + 1}`).value;
+        
+        questions.push({ questionText, options, correctAnswer });
+    }
+
+    let quizId = Date.now().toString();
+    quizzes.push({ id: quizId, title, questions });
+    localStorage.setItem("quizzes", JSON.stringify(quizzes));
+
+    let quizLink = `${window.location.origin}/quiz.html?id=${quizId}`;
+    document.getElementById("quizLink").innerHTML = `Quiz Link: <a href="${quizLink}" target="_blank">${quizLink}</a>`;
+}
+
+// Function to load a quiz from URL
+function loadQuiz() {
+    let urlParams = new URLSearchParams(window.location.search);
+    let quizId = urlParams.get("id");
+    let quiz = quizzes.find(q => q.id === quizId);
+
+    if (!quiz) {
+        document.getElementById("quizContainer").innerHTML = "Quiz not found.";
+        return;
+    }
+
+    document.getElementById("quizTitle").textContent = quiz.title;
+    let questionsHtml = quiz.questions.map((q, index) => {
+        let optionsHtml = q.options.map(opt => `<input type='radio' name='q${index}' value='${opt}'> ${opt}<br>`).join("");
+        return `<div><p>${q.questionText}</p>${optionsHtml}</div>`;
+    }).join("");
+    
+    document.getElementById("quizContainer").innerHTML = questionsHtml + "<button onclick='submitQuiz()'>Submit</button>";
+}
+
+// Function to submit quiz
+function submitQuiz() {
+    let urlParams = new URLSearchParams(window.location.search);
+    let quizId = urlParams.get("id");
+    let quiz = quizzes.find(q => q.id === quizId);
+    
+    let score = 0;
+    quiz.questions.forEach((q, index) => {
+        let selected = document.querySelector(`input[name='q${index}']:checked`);
+        if (selected && selected.value === q.correctAnswer) {
+            score++;
+        }
+    });
+    
+    let username = prompt("Enter your name:");
+    scores.push({ name: username, quizId, score });
+    localStorage.setItem("scores", JSON.stringify(scores));
+    
+    alert(`Your score: ${score}/${quiz.questions.length}`);
+}
+
+// Function to show scoreboard
+function showScoreboard() {
+    let scoreboardHtml = scores.map(s => `<p>${s.name}: ${s.score}</p>`).join("");
+    document.getElementById("scoreboard").innerHTML = scoreboardHtml;
+}
