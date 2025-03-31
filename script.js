@@ -24,7 +24,7 @@ function addQuestion() {
         <input type="text" class="option" placeholder="Option 2">
         <input type="text" class="option" placeholder="Option 3">
         <input type="text" class="option" placeholder="Option 4">
-        <input type="number" class="correctAnswer" placeholder="Correct Answer (1-4)">
+     <input type="number" class="correctAnswer" placeholder="Correct Answer (1-4)">
     `;
 
     questionsDiv.appendChild(questionBox);
@@ -58,7 +58,7 @@ function saveQuiz() {
     }
 
     // Generate a unique quiz ID
-    let quizId = `quiz_${Date.now()}`;
+  let quizId = quiz_${Date.now()};
     let quizData = {
         creator: creatorName,
         title: quizTitle,
@@ -71,7 +71,7 @@ function saveQuiz() {
         if (error) {
             alert("Error saving quiz. Please try again.");
         } else {
-            let quizLink = `${window.location.origin}/quiz.html?id=${quizId}`;
+            let quizLink = ${window.location.origin}/quiz.html?id=${quizId};
             document.getElementById("quizLink").value = quizLink;
             alert("Quiz created successfully!");
         }
@@ -98,15 +98,15 @@ function loadQuiz() {
         document.getElementById("quizTitle").innerText = quiz.title;
         document.getElementById("quizDescription").innerText = quiz.description;
 
-        let form = document.getElementById("quizForm");
+  let form = document.getElementById("quizForm");
         form.innerHTML = "";
         quiz.questions.forEach((q, index) => {
             let div = document.createElement("div");
             div.classList.add("question-box");
-            div.innerHTML = `<p>${q.questionText}</p>` +
-                `<div class="options-container">` +
-                q.options.map((opt, i) => `<label><input type="radio" name="q${index}" value="${i}"> ${opt}</label>`).join("") +
-                `</div>`;
+            div.innerHTML = <p>${q.questionText}</p> +
+                <div class="options-container"> +
+                q.options.map((opt, i) => <label><input type="radio" name="q${index}" value="${i}"> ${opt}</label>).join("") +
+                </div>;
             form.appendChild(div);
         });
     });
@@ -134,12 +134,12 @@ function submitQuiz() {
         let quiz = snapshot.val();
         let score = 0;
         quiz.questions.forEach((q, index) => {
-            let selectedAnswer = document.querySelector(`input[name="q${index}"]:checked`);
+            let selectedAnswer = document.querySelector(input[name="q${index}"]:checked);
             if (selectedAnswer && parseInt(selectedAnswer.value) === q.correctAnswer) {
                 score++;
-            }
+      }
         });
 
-        alert(`Your Score: ${score}/${quiz.questions.length}`);
-    });
+        alert(Your Score: ${score}/${quiz.questions.length});
+    });
 }
