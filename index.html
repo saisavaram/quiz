@@ -1,34 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Create Quiz</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- Firebase Scripts -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js"></script>
 </head>
 <body>
   <div class="container">
     <h2>Create a Quiz</h2>
     <p>Enter your details and quiz information below.</p>
-    <!-- Creator details -->
-    <input type="text" id="creatorName" placeholder="Your Name (Creator)" />
-    <!-- Fields to collect from participants (comma separated) -->
-    <textarea id="detailsToCollect" placeholder="Enter details to collect from participants (comma separated, e.g., Name, Village, Age)"></textarea>
-    
-    <!-- Quiz information -->
-    <input type="text" id="quizTitle" placeholder="Enter Quiz Title" />
+
+    <input type="text" id="creatorName" placeholder="Your Name (Creator)">
+    <textarea id="detailsToCollect" placeholder="Enter details to collect (e.g., Name, Age)"></textarea>
+    <input type="text" id="quizTitle" placeholder="Enter Quiz Title">
     <textarea id="quizDescription" placeholder="Describe your quiz"></textarea>
-    
-    <!-- Questions will be added here -->
+
     <div id="questions"></div>
-    
+
     <button onclick="addQuestion()">Add Question</button>
     <button onclick="saveQuiz()">Generate Quiz Link</button>
-    
+
     <h3>Quiz Link:</h3>
-    <input type="text" id="quizLink" readonly />
+    <input type="text" id="quizLink" readonly>
     <button onclick="copyLink()">Copy Link</button>
   </div>
+
   <script src="script.js"></script>
 </body>
 </html>
