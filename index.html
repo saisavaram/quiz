@@ -7,19 +7,22 @@
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js"></script>
     <script defer src="script.js"></script>
+    <link rel="stylesheet" href="style.css"> <!-- Link to CSS -->
 </head>
 <body>
-    <h1>Create a Quiz</h1>
-    <input type="text" id="creatorName" placeholder="Your Name">
-    <input type="text" id="quizTitle" placeholder="Quiz Title">
-    <textarea id="quizDescription" placeholder="Quiz Description"></textarea>
-    
-    <div id="questions"></div>
-    <button onclick="addQuestion()">Add Question</button>
-    <button onclick="saveQuiz()">Save Quiz</button>
+    <div class="container">
+        <h1>Create a Quiz</h1>
+        <input type="text" id="creatorName" placeholder="Your Name">
+        <input type="text" id="quizTitle" placeholder="Quiz Title">
+        <textarea id="quizDescription" placeholder="Quiz Description"></textarea>
 
-    <h2>Quiz Link</h2>
-    <input type="text" id="quizLink" readonly>
-    <button onclick="copyLink()">Copy Link</button>
+        <div id="questions"></div>
+        <button onclick="addQuestion()">Add Question</button>
+        <button onclick="saveQuiz()">Save Quiz</button>
+
+        <h2>Quiz Link</h2>
+        <input type="text" id="quizLink" readonly>
+        <button onclick="copyLink()">Copy Link</button>
+    </div>
 </body>
 </html>
