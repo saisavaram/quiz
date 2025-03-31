@@ -1,17 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Take Quiz</title>
-    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js"></script>
-    <script defer src="script.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Take Quiz</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body onload="loadQuiz()">
-    <h1 id="quizTitle"></h1>
+  <div class="container">
+    <h2 id="quizTitle"></h2>
     <p id="quizDescription"></p>
     <form id="quizForm"></form>
+    
+    <h3>Enter Your Details</h3>
+    <!-- Participant details will be generated dynamically -->
+    <div id="participantDetails"></div>
     <button onclick="submitQuiz()">Submit</button>
+    
+    <h3>Scoreboard</h3>
+    <table id="scoreboard-table">
+      <thead id="scoreboardHead"></thead>
+      <tbody id="scoreboard"></tbody>
+    </table>
+    
+    <div id="result"></div>
+  </div>
+  <script src="script.js"></script>
 </body>
 </html>
